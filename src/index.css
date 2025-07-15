@@ -1,0 +1,38 @@
+:root {
+	--container: 1440px;
+  --fonte-prata: "Prata", serif;
+  --fonte-montserrat: "Montserrat", sans-serif;
+	--cor-violeta: #6278F7;
+  --cor-cinza-claro: #f6f6f6;
+  --cor-cinza-medio: #a4a4a4;
+  --sombra-p: 4px 4px 12px rgba(0, 0, 0, 10%);
+  --sombra-m: 8px 8px 12px rgba(0, 0, 0, 10%);
+  --sombra-g: 12px 12px 12px rgba(0, 0, 0, 10%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+body {  
+  background-color: #fff;
+  color: #000;
+  font-family: var(--fonte-montserrat);
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}

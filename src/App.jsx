@@ -1,11 +1,11 @@
-import './App.css'
-import Banner from './components/Banner/Banner'
+import Banner from './components/Banner/'
+import Form from './components/Form/'
 
 export default function App() {
-
   return (
     <>
       <Banner />
+      <Form />
     </>
   )
 }
