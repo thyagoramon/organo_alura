@@ -5,7 +5,9 @@ export default function App() {
   return (
     <>
       <Banner />
-      <Form />
+      <section>
+        <Form />
+      </section>
     </>
   )
 }

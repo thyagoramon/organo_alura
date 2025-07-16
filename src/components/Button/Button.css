@@ -1,0 +1,15 @@
+.Button {
+	background-color: var(--cor-violeta);
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 20px;
+	border: none;
+	border-radius: 10px;
+	transition: 0.3s ease;
+	cursor: pointer;
+	box-shadow: var(--sombra-p);
+	&:hover {
+		color: var(--cor-ciano);
+	}
+}

@@ -5,6 +5,7 @@
 	--cor-violeta: #6278F7;
   --cor-cinza-claro: #f6f6f6;
   --cor-cinza-medio: #a4a4a4;
+  --cor-ciano: #95ffd4;
   --sombra-p: 4px 4px 12px rgba(0, 0, 0, 10%);
   --sombra-m: 8px 8px 12px rgba(0, 0, 0, 10%);
   --sombra-g: 12px 12px 12px rgba(0, 0, 0, 10%);
@@ -27,6 +28,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
+}
+
+section {
+  padding: 64px 0;
+  max-width: var(--container);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
