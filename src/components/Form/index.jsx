@@ -1,4 +1,4 @@
-import InputText from "../InputText"
+import InputText from "@/components/InputText"
 import "./Form.css"
 
 export default function Form() {
