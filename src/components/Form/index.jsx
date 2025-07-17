@@ -5,22 +5,12 @@ import Button from "../Button"
 import "./Form.css"
 
 const Form = (props) => {
-	//lista dos times disponíveis para cadastro
-	const teams = [
-		'Programação',
-		'Front-end',
-		'Data Science',
-		'Devops',
-		'UX e Design',
-		'Mobile',
-		'Inovação e gestão'
-	]
-
 	//useStates dos inputs
 	const [nome, setNome] = useState('')
 	const [cargo, setCargo] = useState('')
 	const [imagem, setImagem] = useState('')
-	const [time, setTime] = useState('')
+	const [time, setTime] = useState(props.teams[0] || '')
+		//props.teams[0] || '' → isso atribui um valor padrão, o primeiro time da lista, e evita erros quando o usuário não seleciona nada.
 
 	//função para pegar valores dos inputs
 	const formSubmit = (e) => {
@@ -31,12 +21,19 @@ const Form = (props) => {
 			imagem,
 			time
 		})
+		console.log('dados enviados')
+		
+		//limpar inputs após envio
+		setNome('')
+		setCargo('')
+		setImagem('')
+		setImagem('')
 	}
 
 	//componente
 	return (
 		<form className="form" onSubmit={formSubmit}>
-			<h2>Preencha os dados para criar o card do colaborador</h2>
+			<h3>Preencha os dados para criar o card do colaborador</h3>
 			<InputText
 				label="Nome"
 				id="nome"
@@ -64,7 +61,7 @@ const Form = (props) => {
 			<InputSelect
 				label="Time"
 				id="time"
-				items={teams}
+				items={props.teams}
 				value={time}
 				hook={value => setTime(value)}
 			/>

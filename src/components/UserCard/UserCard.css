@@ -1,0 +1,46 @@
+.userCard {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	border-radius: 10px;
+	overflow: hidden;
+	width: 260px;
+	height: 270px;
+	box-sizing: border-box;
+	background-color: var(--cor-branco);
+	box-shadow: var(--sombra-m);
+}
+
+.userCard-top {
+	position: relative;
+	width: 100%;
+	height: 90px;
+	img {
+		position: absolute;
+		width: 120px;
+		height: 120px;
+		border-radius: 60px;
+		transform: translate(-60px, -60px);
+		top: 90px;
+		left: 130px;
+	}
+}
+
+.userCard-botton {
+	margin-top: 80px;
+	text-align: center;
+	padding: 0 30px 30px 30px;
+	h4 {
+		color: var(--cor-violeta);
+		font-size: 18px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	h5 {
+		color: var(--cor-grafite);
+		font-size: 16px;
+		font-weight: 400;
+	}
+}

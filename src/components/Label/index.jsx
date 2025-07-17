@@ -1,8 +1,8 @@
 import "./Label.css"
 
-const Label = ({id, children}) => {
+const Label = (props) => {
 	return (
-		<label className="label" htmlFor={id}>{children}</label>
+		<label className="label" htmlFor={props.id}>{props.children}</label>
 	)
 }
 

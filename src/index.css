@@ -1,11 +1,32 @@
 :root {
 	--container: 1440px;
+
   --fonte-prata: "Prata", serif;
   --fonte-montserrat: "Montserrat", sans-serif;
-	--cor-violeta: #6278F7;
+
+	--cor-preto: #000;
+  --cor-branco: #fff;
+  --cor-violeta: #6278F7;
   --cor-cinza-claro: #f6f6f6;
   --cor-cinza-medio: #a4a4a4;
+  --cor-grafite: #212121;
   --cor-ciano: #95ffd4;
+
+  --cor-programacao-p: #57c278;
+  --cor-programacao-s: #D9F7E9;
+  --cor-front-p: #82CFFA;
+  --cor-front-s: #E8F8FF;
+  --cor-data-p: #A6D157;
+  --cor-data-s: #F0F8E2;
+  --cor-devops-p: #E06B69;
+  --cor-devops-s: #FDE7E8;
+  --cor-ux-p: #DB6EBF;
+  --cor-ux-s: #FAE9F5;
+  --cor-mobile-p: #FFBA05;
+  --cor-mobile-s: #FFF5D9;
+  --cor-inovacao-p: #FF8A29;
+  --cor-inovacao-s: #FFEEDF;
+
   --sombra-p: 4px 4px 12px rgba(0, 0, 0, 10%);
   --sombra-m: 8px 8px 12px rgba(0, 0, 0, 10%);
   --sombra-g: 12px 12px 12px rgba(0, 0, 0, 10%);
@@ -31,14 +52,26 @@ body {
   align-items: center;
 }
 
-section {
-  padding: 64px 0;
-  max-width: var(--container);
+h3 {
+  font-family: var(--fonte-prata);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.section {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.padding {
+  padding: 64px 0;
+}
+
+.container {
+  max-width: var(--container);
 }
 
 #root {
