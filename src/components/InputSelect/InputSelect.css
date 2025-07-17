@@ -1,4 +1,4 @@
-.InputSelection {
+.InputSelect {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -15,7 +15,7 @@
 	}
 }
 
-.InputSelection::after {
+.InputSelect::after {
 	content: '▼';
 	position: absolute;
 	top: 56%;

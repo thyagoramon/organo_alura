@@ -1,9 +1,11 @@
+import { useState } from "react"
 import InputText from "../InputText"
-import InputSelection from "../InputSelection"
+import InputSelect from "../InputSelect"
 import Button from "../Button"
 import "./Form.css"
 
-const Form = () => {
+const Form = (props) => {
+	//lista dos times disponíveis para cadastro
 	const teams = [
 		'Programação',
 		'Front-end',
@@ -14,11 +16,24 @@ const Form = () => {
 		'Inovação e gestão'
 	]
 
+	//useStates dos inputs
+	const [nome, setNome] = useState('')
+	const [cargo, setCargo] = useState('')
+	const [imagem, setImagem] = useState('')
+	const [time, setTime] = useState('')
+
+	//função para pegar valores dos inputs
 	const formSubmit = (e) => {
 		e.preventDefault()
-		console.log('form sended')
+		props.newUser({
+			nome,
+			cargo,
+			imagem,
+			time
+		})
 	}
 
+	//componente
 	return (
 		<form className="form" onSubmit={formSubmit}>
 			<h2>Preencha os dados para criar o card do colaborador</h2>
@@ -27,23 +42,31 @@ const Form = () => {
 				id="nome"
 				placeholder="Digite o seu nome"
 				required={true}
+				value={nome}
+				hook={value => setNome(value)}
 			/>
 			<InputText
 				label="Cargo"
 				id="cargo"
 				placeholder="Digite o seu cargo"
 				required={true}
+				value={cargo}
+				hook={value => setCargo(value)}
 			/>
 			<InputText
 				label="Imagem"
 				id="imagem"
 				placeholder="Informe o endereço da imagem"
 				required={false}
+				value={imagem}
+				hook={value => setImagem(value)}
 			/>
-			<InputSelection
+			<InputSelect
 				label="Time"
 				id="time"
 				items={teams}
+				value={time}
+				hook={value => setTime(value)}
 			/>
 			<Button>Criar Card</Button>
 		</form>
