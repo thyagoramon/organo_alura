@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Banner from './components/Banner'
 import Form from './components/Form'
 import Team from './components/Team'
+import Footer from './components/Footer'
 import './index.css'
 
 export default function App() {
@@ -69,6 +70,7 @@ export default function App() {
             users={users.filter(user => user.time === team.nome)}
         />)}
       </section>
+      <Footer dev='Thyago Ramon'/>
     </>
   )
 }
