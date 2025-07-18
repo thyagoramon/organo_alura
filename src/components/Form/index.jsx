@@ -9,8 +9,7 @@ const Form = (props) => {
 	const [nome, setNome] = useState('')
 	const [cargo, setCargo] = useState('')
 	const [imagem, setImagem] = useState('')
-	const [time, setTime] = useState(props.teams[0] || '')
-		//props.teams[0] || '' → isso atribui um valor padrão, o primeiro time da lista, e evita erros quando o usuário não seleciona nada.
+	const [time, setTime] = useState('')
 
 	//função para pegar valores dos inputs
 	const formSubmit = (e) => {
@@ -21,13 +20,12 @@ const Form = (props) => {
 			imagem,
 			time
 		})
-		console.log('dados enviados')
 		
 		//limpar inputs após envio
 		setNome('')
 		setCargo('')
 		setImagem('')
-		setImagem('')
+		setTime('')
 	}
 
 	//componente

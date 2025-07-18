@@ -10,8 +10,11 @@
 		border: none;
 		box-sizing: border-box;
 		box-shadow: var(--sombra-p);
-		color: var(--cor-cinza-medio);
+		color: var(--cor-preto);
 		font-size: 16px;
+	}
+	select:invalid {
+		color: var(--cor-cinza-medio);
 	}
 }
 

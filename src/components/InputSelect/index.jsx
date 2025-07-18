@@ -9,7 +9,8 @@ const InputSelect = (props) => {
 	return (
 		<div className="InputSelect">
 			<Label id={props.id}>{props.label}</Label>
-			<select id={props.id} value={props.value} onChange={changing}>
+			<select required id={props.id} value={props.value} onChange={changing}>
+				<option value=''>Selecione um time</option>
 				{props.items.map(item => <option key={item}>{item}</option>)}
 			</select>
 		</div>
