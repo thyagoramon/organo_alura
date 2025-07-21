@@ -3,9 +3,9 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
+	position: relative;
 
 	border-radius: 10px;
-	overflow: hidden;
 	width: 260px;
 	height: 270px;
 	box-sizing: border-box;
@@ -13,8 +13,22 @@
 	box-shadow: var(--sombra-m);
 }
 
+.userCard-delete {
+	font-size: 25px;
+	color: var(--cor-preto);
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	cursor: pointer;
+	transition: 0.3s ease;
+	&:hover {
+		scale: 1.2;
+	}
+}
+
 .userCard-top {
-	position: relative;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
 	width: 100%;
 	height: 90px;
 	img {

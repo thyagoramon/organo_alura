@@ -1,11 +1,16 @@
-.form {
+.form-section {
 	box-sizing: border-box;
 	background-color: var(--cor-cinza-claro);
 	box-shadow: var(--sombra-m);
-	max-width: 800px;
-	width: 90%;
 	padding: 32px 64px;
 	border-radius: 20px;
+	display: flex;
+	gap: 48px;
+	width: 90vw;
+}
+
+.form {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
