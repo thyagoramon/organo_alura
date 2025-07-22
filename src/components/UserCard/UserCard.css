@@ -7,7 +7,6 @@
 
 	border-radius: 10px;
 	width: 260px;
-	height: 270px;
 	box-sizing: border-box;
 	background-color: var(--cor-branco);
 	box-shadow: var(--sombra-m);
@@ -45,7 +44,7 @@
 .userCard-botton {
 	margin-top: 80px;
 	text-align: center;
-	padding: 0 30px 30px 30px;
+	padding: 0 30px 10px 30px;
 	h4 {
 		color: var(--cor-violeta);
 		font-size: 18px;
@@ -56,5 +55,20 @@
 		color: var(--cor-grafite);
 		font-size: 16px;
 		font-weight: 400;
+	}
+}
+
+.userCard-fav {
+	margin-top: 10px;
+	font-size: 24px;
+
+	.fav-true, .fav-false {
+		cursor: pointer;
+	}
+	.fav-true {
+		color: var(--cor-vermelho);
+	}
+	.fav-false {
+		color: var(--cor-cinza-medio);
 	}
 }

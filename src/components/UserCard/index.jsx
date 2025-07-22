@@ -1,4 +1,4 @@
-import { IoMdCloseCircle } from "react-icons/io";
+import { IoMdCloseCircle, IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import './UserCard.css'
 
 const UserCard = (props) => {
@@ -11,6 +11,12 @@ const UserCard = (props) => {
 			<div className='userCard-botton'>
 				<h4>{props.nome}</h4>
 				<h5>{props.cargo}</h5>
+				<div className="userCard-fav">
+					{props.fav
+						?	<IoIosHeart onClick={() => props.onFav(props.id)} className="fav-true"/>
+						: <IoIosHeartEmpty onClick={() => props.onFav(props.id)} className="fav-false"
+					/>}
+				</div>
 			</div>
 		</div>
 	)

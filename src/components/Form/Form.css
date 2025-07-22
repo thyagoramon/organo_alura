@@ -1,18 +1,19 @@
 .form-section {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	width: 90vw;
+}
+
+.form {
 	box-sizing: border-box;
 	background-color: var(--cor-cinza-claro);
 	box-shadow: var(--sombra-m);
 	padding: 32px 64px;
 	border-radius: 20px;
-	display: flex;
-	gap: 48px;
-	width: 90vw;
-}
-
-.form {
-	width: 100%;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	justify-content: flex-start;
 	gap: 24px;
 }

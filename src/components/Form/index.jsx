@@ -2,6 +2,7 @@ import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import InputText from "../InputText"
 import InputSelect from "../InputSelect"
+import InputColor from "../InputColor"
 import Button from "../Button"
 import "./Form.css"
 
@@ -12,7 +13,7 @@ const Form = (props) => {
 	const [imagem, setImagem] = useState('')
 	const [time, setTime] = useState('')
 	const [nomeTime, setNomeTime] = useState('')
-	const [corTime, setCorTime] = useState('')
+	const [corTime, setCorTime] = useState('#ff9999')
 
 	//função submit form novo usuário
 	const formSubmit = (e) => {
@@ -22,7 +23,8 @@ const Form = (props) => {
 			nome,
 			cargo,
 			imagem,
-			time
+			time,
+			fav: false
 		})
 		
 		//limpar inputs após envio
@@ -43,8 +45,8 @@ const Form = (props) => {
 		
 		//limpar inputs após envio
 		setNomeTime('')
-		setCorTime('')
-		alert(`Time criado com sucesso, aogora ${nomeTime} está disponível na opção 'Time' ao criar novo usuário`)
+		setCorTime('#ff9999')
+		alert(`Time criado com sucesso, agora '${nomeTime}' está disponível na opção 'Time' ao criar um novo usuário`)
 	}
 
 	//componente
@@ -96,8 +98,8 @@ const Form = (props) => {
 					value={nomeTime}
 					hook={value => setNomeTime(value)}
 				/>				
-				<InputText
-					label="Cor"
+				<InputColor
+					label="Cor:"
 					id="cor"
 					placeholder="Digite a cor do time"
 					required={true}

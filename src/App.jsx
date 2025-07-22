@@ -53,8 +53,9 @@ export default function App() {
       nome: 'Thyago Ramon',
 			cargo: 'Desenvolvedor front-end',
 			imagem: 'http://github.com/thyagoramon.png',
-			time: 'Front-end'
-		}
+			time: 'Front-end',
+      fav: true
+		},
   ])
   
   //função para adicionar novo 'user' ao array 'users'
@@ -83,6 +84,16 @@ export default function App() {
     }))
   }
 
+  //função para favoritar usuários
+  const favoriting = (id) => {
+    setUsers(users.map(user => {
+      if (user.id === id) {
+        user.fav = !user.fav
+      }
+      return user
+    }))
+  }
+
   return (
     <>
       <Banner />
@@ -103,6 +114,7 @@ export default function App() {
             editColor={teamColor}
             users={users.filter(user => user.time === team.nome)}
             onDelete={deleteUser}
+            onFav={favoriting}
           />
         )}
       </section>

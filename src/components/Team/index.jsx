@@ -31,6 +31,8 @@ const Team = (props) => {
 						imagem={user.imagem}
 						cor={props.cor}
 						aoDeletar={props.onDelete}
+						fav={user.fav}
+						onFav={props.onFav}
 					/>
 				)}
 			</div>
