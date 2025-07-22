@@ -7,10 +7,23 @@
 	padding-bottom: 40px;
 	gap: 30px;
 	width: 100%;
+	position: relative;
 	h3 {
 		border-bottom: solid 4px;
 		display: inline-block;
 		padding-bottom: 8px;
+	}
+}
+
+.team-colors {
+	position: absolute;
+	top: 25px;
+	right: 50px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	input {
+		cursor: pointer;
 	}
 }
 

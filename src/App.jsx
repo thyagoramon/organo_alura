@@ -1,55 +1,100 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'; //criação de ids
+
 import Banner from './components/Banner'
 import Form from './components/Form'
 import Team from './components/Team'
 import Footer from './components/Footer'
+
 import './index.css'
 
 export default function App() {
-  const teams = [
-    {
-      nome: 'Programação',
-      corPrimaria: '#57c278',
-      corSecundaria: '#D9F7E9'
-    },
-    {
-      nome: 'Front-end',
-      corPrimaria: '#82CFFA',
-      corSecundaria: '#E8F8FF'
-    },
-    {
-      nome: 'Data Science',
-      corPrimaria: '#A6D157',
-      corSecundaria: '#F0F8E2'
-    },
-    {
-      nome: 'Devops',
-      corPrimaria: '#E06B69',
-      corSecundaria: '#FDE7E8'
-    },
-    {
-      nome: 'UX e Design',
-      corPrimaria: '#DB6EBF',
-      corSecundaria: '#FAE9F5'
-    },
-    {
-      nome: 'Mobile',
-      corPrimaria: '#FFBA05',
-      corSecundaria: '#FFF5D9'
-    },
-    {
-      nome: 'Inovação e gestão',
-      corPrimaria: '#FF8A29',
-      corSecundaria: '#FFEEDF'
-    },
-  ]
-
-  const [users, setUsers] = useState([])
   
-  //função para adicionar novo 'user' ao array 'users'
+  //times
+  const [teams, setTeams] = useState ([
+    {
+      id: uuidv4(),
+      nome: 'Programação',
+      cor: '#57c278',
+    },
+    {
+      id: uuidv4(),
+      nome: 'Front-end',
+      cor: '#82CFFA',
+    },
+    {
+      id: uuidv4(),
+      nome: 'Data Science',
+      cor: '#A6D157',
+    },
+    {
+      id: uuidv4(),
+      nome: 'Devops',
+      cor: '#E06B69',
+    },
+    {
+      id: uuidv4(),
+      nome: 'UX e Design',
+      cor: '#DB6EBF',
+    },
+    {
+      id: uuidv4(),
+      nome: 'Mobile',
+      cor: '#FFBA05',
+    },
+    {
+      id: uuidv4(),
+      nome: 'Inovação e gestão',
+      cor: '#FF8A29',
+    },
+  ])
+
+  //usuários
+  const [users, setUsers] = useState([
+    {
+			id: uuidv4(),
+      nome: 'Thyago Ramon',
+			cargo: 'Desenvolvedor front-end',
+			imagem: 'http://github.com/thyagoramon.png',
+			time: 'Front-end',
+      fav: true
+		},
+  ])
+  
+  //função adicionar novo usuário
   const addNewUser = (user) => {
     setUsers([...users, user])
       //isso atualiza o array 'users' adicionando 'user',
+  }
+  
+  //função para deletar usuário
+  const deleteUser = (id) => {
+    setUsers(users.filter(user => user.id !== id))
+  }
+  
+  //função apra criar novo time
+  const addNewTeam = (team) => {
+    setTeams([...teams, team])
+  }
+
+  //função para alterar cor do time
+  const teamColor = (cor, id) => {
+    setTeams(teams.map(team => {
+      if (team.id === id) {
+        team.cor = cor
+      }
+      return team
+    }))
+  }
+
+  //função para favoritar usuários
+  const favoriting = (id) => {
+    setUsers(users.map(user => {
+      if (user.id === id) {
+        user.fav = !user.fav
+      }
+      return user
+    }))
   }
 
   return (
@@ -58,17 +103,23 @@ export default function App() {
       <section className='section padding container'>
         <Form
           newUser={newUser => addNewUser(newUser)}
+          newTeam={newTeam => addNewTeam(newTeam)}
           teams={teams.map(time => time.nome)}
         />
       </section>
       <section className='section'>
-        {teams.map(team => <Team
+        {teams.map(team =>
+          <Team
+            key={team.id}
+            id={team.id}
             nome={team.nome}
-            key={team.nome}
-            corPrimaria={team.corPrimaria}
-            corSecundaria={team.corSecundaria}
+            cor={team.cor}
+            editColor={teamColor}
             users={users.filter(user => user.time === team.nome)}
-        />)}
+            onDelete={deleteUser}
+            onFav={favoriting}
+          />
+        )}
       </section>
       <Footer dev='Thyago Ramon'/>
     </>
