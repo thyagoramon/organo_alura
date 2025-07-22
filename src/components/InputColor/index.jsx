@@ -13,10 +13,8 @@ const InputColor = (props) => {
 			<input
 				value={props.value}
 				onChange={changing}
-				required={props.required}
 				type="color"
 				id={props.id}
-				placeholder={props.placeholder}
 			/>
 		</div>
 	)

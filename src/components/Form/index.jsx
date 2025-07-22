@@ -1,9 +1,12 @@
 import { useState } from "react"
+
 import { v4 as uuidv4 } from 'uuid';
+
 import InputText from "../InputText"
 import InputSelect from "../InputSelect"
 import InputColor from "../InputColor"
 import Button from "../Button"
+
 import "./Form.css"
 
 const Form = (props) => {
@@ -15,7 +18,7 @@ const Form = (props) => {
 	const [nomeTime, setNomeTime] = useState('')
 	const [corTime, setCorTime] = useState('#ff9999')
 
-	//função submit form novo usuário
+	//função form novo usuário
 	const formSubmit = (e) => {
 		e.preventDefault()
 		props.newUser({
@@ -34,7 +37,7 @@ const Form = (props) => {
 		setTime('')
 	}
 
-	//função submit form novo time
+	//função form novo time
 	const newTime = (e) => {
 		e.preventDefault()
 		props.newTeam({

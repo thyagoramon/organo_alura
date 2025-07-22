@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'; //criação de ids
+
 import Banner from './components/Banner'
 import Form from './components/Form'
 import Team from './components/Team'
 import Footer from './components/Footer'
+
 import './index.css'
 
 export default function App() {
-  //array dos times cadastrados
+  
+  //times
   const [teams, setTeams] = useState ([
     {
       id: uuidv4(),
@@ -46,7 +49,7 @@ export default function App() {
     },
   ])
 
-  //array dos usuários cadastrados
+  //usuários
   const [users, setUsers] = useState([
     {
 			id: uuidv4(),
@@ -58,10 +61,10 @@ export default function App() {
 		},
   ])
   
-  //função para adicionar novo 'user' ao array 'users'
+  //função adicionar novo usuário
   const addNewUser = (user) => {
     setUsers([...users, user])
-    //isso atualiza o array 'users' adicionando 'user',
+      //isso atualiza o array 'users' adicionando 'user',
   }
   
   //função para deletar usuário

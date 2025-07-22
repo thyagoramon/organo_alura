@@ -1,4 +1,5 @@
 import { IoMdCloseCircle, IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
+
 import './UserCard.css'
 
 const UserCard = (props) => {
