@@ -102,6 +102,34 @@ export default function App() {
     }))
   }
 
+  //função para editar nome do time
+  const editTeamName = (newName, oldName, id) => {
+    //sai se não há edição
+    if (newName === oldName) {
+      return
+    }
+    
+    const validacao = teams.some((team) => team.nome === newName)
+
+    if (validacao) {
+      alert(`'${newName}' já está na lista de times, tente outro nome`)
+    } else {
+      setTeams(teams.map(team => {
+        if (team.id === id) {
+          return {...team, nome: newName}
+        }
+        return team
+      }))
+  
+      setUsers(users.map(user => {
+        if (user.time === oldName) {
+          return {...user, time: newName}
+        }
+        return user
+      }))
+    }
+  }
+
   //função para favoritar usuários
   const favoriting = (id) => {
     setUsers(users.map(user => {
@@ -126,13 +154,12 @@ export default function App() {
         {teams.map(team =>
           <Team
             key={team.id}
-            id={team.id}
-            nome={team.nome}
-            cor={team.cor}
+            team={team}
             editColor={teamColor}
             users={users.filter(user => user.time === team.nome)}
             onDelete={deleteUser}
             onFav={favoriting}
+            editTeamName={editTeamName}
           />
         )}
       </section>
