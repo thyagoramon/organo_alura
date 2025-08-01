@@ -8,8 +8,7 @@ import Footer from './components/Footer'
 
 import './index.css'
 
-export default function App() {
-  
+export default function App() {  
   //times
   const [teams, setTeams] = useState ([
     {
@@ -63,8 +62,15 @@ export default function App() {
   
   //função adicionar novo usuário
   const addNewUser = (user) => {
-    setUsers([...users, user])
-      //isso atualiza o array 'users' adicionando 'user',
+    //impedir usuários repetidos
+    const userName = user.nome.toLowerCase()
+    const validacao = users.some((user) => user.nome.toLowerCase() === userName)
+    
+    if (validacao) {
+      alert(`'${user.nome}' já está no organograma`)
+    } else {
+      setUsers([...users, user])
+    }
   }
   
   //função para deletar usuário
@@ -72,9 +78,18 @@ export default function App() {
     setUsers(users.filter(user => user.id !== id))
   }
   
-  //função apra criar novo time
+  //função para criar novo time
   const addNewTeam = (team) => {
-    setTeams([...teams, team])
+    //impedir times repetidos
+    const teamName = team.nome.toLowerCase()
+    const validacao = teams.some((team) => team.nome.toLowerCase() === teamName)
+  
+    if (validacao) {
+      alert(`'${team.nome}' já está na lista`)
+    } else {
+      setTeams([...teams, team])
+      alert(`Time criado com sucesso, agora '${team.nome}' está disponível na opção 'Time' ao criar um novo usuário`)
+    }
   }
 
   //função para alterar cor do time
@@ -121,7 +136,7 @@ export default function App() {
           />
         )}
       </section>
-      <Footer dev='Thyago Ramon'/>
+      <Footer dev='Thyago Ramon' link='https://github.com/thyagoramon'/>
     </>
   )
 }

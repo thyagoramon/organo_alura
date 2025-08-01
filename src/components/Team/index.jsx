@@ -8,7 +8,7 @@ import '@/index.css'
 const Team = (props) => {
 	return (
 		props.users.length > 0 &&
-			//&& → renderização condicional
+			//renderização condicional
 		
 		<section className='team' style={{backgroundColor: hexToRgba(props.cor, 0.25)}}>
 			<div className='team-colors'>

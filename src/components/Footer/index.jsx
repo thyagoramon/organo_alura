@@ -5,7 +5,7 @@ import logo from '@/assets/logo.png'
 import './Footer.css'
 import '@/index.css'
 
-const Footer = (props) => {
+const Footer = ({dev, link}) => {
 	return (
 		<footer className='footer'>
 			<div className='footer-container container'>
@@ -23,7 +23,7 @@ const Footer = (props) => {
 				<a className='footer-logo' href="#">
 					<img src={logo} alt="Logo Organo" />
 				</a>
-				<p className='footer-dev'>Desenvolvido por <a href="https://github.com/thyagoramon" target='_blank'>{props.dev}</a></p>
+				<p className='footer-dev'>Desenvolvido por <a href={link} target='_blank'>{dev}</a></p>
 			</div>
 		</footer>
 	)

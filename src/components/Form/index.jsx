@@ -18,7 +18,7 @@ const Form = (props) => {
 	const [nomeTime, setNomeTime] = useState('')
 	const [corTime, setCorTime] = useState('#ff9999')
 
-	//função form novo usuário
+	//função submit novo usuário
 	const formSubmit = (e) => {
 		e.preventDefault()
 		props.newUser({
@@ -37,7 +37,7 @@ const Form = (props) => {
 		setTime('')
 	}
 
-	//função form novo time
+	//função submit novo time
 	const newTime = (e) => {
 		e.preventDefault()
 		props.newTeam({
@@ -49,7 +49,6 @@ const Form = (props) => {
 		//limpar inputs após envio
 		setNomeTime('')
 		setCorTime('#ff9999')
-		alert(`Time criado com sucesso, agora '${nomeTime}' está disponível na opção 'Time' ao criar um novo usuário`)
 	}
 
 	//componente
