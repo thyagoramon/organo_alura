@@ -1,6 +1,6 @@
 import { useState } from "react"
-
 import { v4 as uuidv4 } from 'uuid';
+import { MdModeEdit } from "react-icons/md";
 
 import InputText from "../InputText"
 import InputSelect from "../InputSelect"
@@ -15,8 +15,6 @@ const Form = (props) => {
 	const [cargo, setCargo] = useState('')
 	const [imagem, setImagem] = useState('')
 	const [time, setTime] = useState('')
-	const [nomeTime, setNomeTime] = useState('')
-	const [corTime, setCorTime] = useState('#ff9999')
 
 	//função submit novo usuário
 	const formSubmit = (e) => {
@@ -37,25 +35,11 @@ const Form = (props) => {
 		setTime('')
 	}
 
-	//função submit novo time
-	const newTime = (e) => {
-		e.preventDefault()
-		props.newTeam({
-			id: uuidv4(),
-			nome: nomeTime,
-			cor: corTime
-		})
-		
-		//limpar inputs após envio
-		setNomeTime('')
-		setCorTime('#ff9999')
-	}
-
 	//componente
 	return (
 		<section className="form-section">
 			<form className="form" onSubmit={formSubmit}>
-				<h3>Preencha os dados para criar o card do colaborador</h3>
+				<h3>Preencha os dados para adicionar um novo colaborador</h3>
 				<InputText
 					label="Nome"
 					id="nome"
@@ -75,22 +59,26 @@ const Form = (props) => {
 				<InputText
 					label="Imagem"
 					id="imagem"
-					placeholder="Informe o endereço da imagem"
+					placeholder="Informe o endereço da imagem (url)"
 					required={false}
 					value={imagem}
 					hook={value => setImagem(value)}
 				/>
-				<InputSelect
-					label="Time"
-					id="time"
-					items={props.teams}
-					value={time}
-					hook={value => setTime(value)}
-				/>
+				<div className="form-time">
+					<InputSelect
+						label="Time"
+						id="time"
+						items={props.teams}
+						value={time}
+						hook={value => setTime(value)}
+					/>
+					<button type="button" className="btn-time"><MdModeEdit /></button>
+				</div>
+				
 				<Button>Novo usuário</Button>
 			</form>
 			
-			<form className="form" onSubmit={newTime}>
+			{/* <form className="form" onSubmit={newTime}>
 				<h3>Preencha os dados para criar um novo time</h3>
 				<InputText
 					label="Time"
@@ -109,7 +97,7 @@ const Form = (props) => {
 					hook={value => setCorTime(value)}
 				/>				
 				<Button>Novo Time</Button>
-			</form>
+			</form> */}
 		</section>
 	)
 }
