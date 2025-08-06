@@ -7,9 +7,10 @@ import Team from './components/Team'
 import Footer from './components/Footer'
 
 import './index.css'
+import ModalNewTeam from './components/ModalNewTeam';
 
 export default function App() {  
-  //times
+  //estados
   const [teams, setTeams] = useState ([
     {
       id: uuidv4(),
@@ -48,7 +49,6 @@ export default function App() {
     },
   ])
 
-  //usuários
   const [users, setUsers] = useState([
     {
 			id: uuidv4(),
@@ -59,6 +59,8 @@ export default function App() {
       fav: true
 		},
   ])
+
+  const [showModalNewTeam, setShowModalNewTeam] = useState(false);
   
   //função adicionar novo usuário
   const addNewUser = (user) => {
@@ -148,6 +150,8 @@ export default function App() {
           newUser={newUser => addNewUser(newUser)}
           newTeam={newTeam => addNewTeam(newTeam)}
           teams={teams.map(time => time.nome)}
+          showModalNewTeam={showModalNewTeam}
+          setShowModalNewTeam={setShowModalNewTeam}
         />
       </section>
       <section className='section'>
@@ -164,6 +168,10 @@ export default function App() {
         )}
       </section>
       <Footer dev='Thyago Ramon' link='https://github.com/thyagoramon'/>
+      <ModalNewTeam
+        showModalNewTeam={showModalNewTeam}
+        setShowModalNewTeam={setShowModalNewTeam}
+      />
     </>
   )
 }

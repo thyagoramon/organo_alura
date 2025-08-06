@@ -1,15 +1,18 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { MdModeEdit } from "react-icons/md";
+import { FaPlus } from "react-icons/fa";
 
 import InputText from "../InputText"
 import InputSelect from "../InputSelect"
-import InputColor from "../InputColor"
 import Button from "../Button"
+import SimpleButton from "../SimpleButton";
 
 import "./Form.css"
 
-const Form = (props) => {
+const Form = ({newUser, teams, showModalNewTeam, setShowModalNewTeam}) => {
+	//estados
+
 	//useStates dos inputs
 	const [nome, setNome] = useState('')
 	const [cargo, setCargo] = useState('')
@@ -19,7 +22,7 @@ const Form = (props) => {
 	//função submit novo usuário
 	const formSubmit = (e) => {
 		e.preventDefault()
-		props.newUser({
+		newUser({
 			id: uuidv4(),
 			nome,
 			cargo,
@@ -68,36 +71,16 @@ const Form = (props) => {
 					<InputSelect
 						label="Time"
 						id="time"
-						items={props.teams}
+						items={teams}
 						value={time}
 						hook={value => setTime(value)}
 					/>
-					<button type="button" className="btn-time"><MdModeEdit /></button>
+					<SimpleButton onClick={()=> setShowModalNewTeam(true)}><FaPlus /></SimpleButton>
+					<SimpleButton><MdModeEdit /></SimpleButton>
 				</div>
 				
 				<Button>Novo usuário</Button>
 			</form>
-			
-			{/* <form className="form" onSubmit={newTime}>
-				<h3>Preencha os dados para criar um novo time</h3>
-				<InputText
-					label="Time"
-					id="novoTime"
-					placeholder="Digite o nome do time"
-					required={true}
-					value={nomeTime}
-					hook={value => setNomeTime(value)}
-				/>				
-				<InputColor
-					label="Cor:"
-					id="cor"
-					placeholder="Digite a cor do time"
-					required={true}
-					value={corTime}
-					hook={value => setCorTime(value)}
-				/>				
-				<Button>Novo Time</Button>
-			</form> */}
 		</section>
 	)
 }

@@ -1,0 +1,26 @@
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(255 , 255, 255, 0.75);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+
+.ModalNewTeam {
+	background-color: var(--cor-cinza-claro);
+	box-shadow: var(--sombra-m);
+	padding: 32px 64px;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 24px;
+  width: 50vw;
+	z-index: 10;
+}

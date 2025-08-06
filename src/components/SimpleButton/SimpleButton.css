@@ -1,0 +1,17 @@
+.simpleButton {
+  background-color: var(--cor-violeta);
+	border: none;
+	border-radius: 50%;
+	color: var(--cor-branco);
+	min-width: 58px;
+	height: 58px;
+	font-size: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.3s ease;
+	&:hover {
+		color: var(--cor-ciano);
+	}
+}
