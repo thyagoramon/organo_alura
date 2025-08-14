@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import hexToRgba from 'hex-to-rgba'
 import { FaRegEdit, FaCheck  } from "react-icons/fa";
+import hexToRgba from 'hex-to-rgba'
 import UserCard from '../UserCard'
 import './Team.css'
 import '@/index.css'
 
-const Team = ({team, editColor, users, onDelete, onFav, editTeamName}) => {
+const Team = ({team, users, editColor, onDelete, onFav, editTeamName}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [newTeamName, setNewTeamName] = useState(team.nome)
 	const inputRef = useRef(null);

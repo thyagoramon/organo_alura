@@ -2,16 +2,16 @@ import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { MdModeEdit } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
-
 import InputText from "../InputText"
 import InputSelect from "../InputSelect"
 import Button from "../Button"
 import SimpleButton from "../SimpleButton";
+import { useApp } from "@/context/useApp";
 
 import "./Form.css"
 
-const Form = ({newUser, teams, showModalNewTeam, setShowModalNewTeam}) => {
-	//estados
+const Form = () => {
+	const {teams, setShowModalNewTeam, addNewUser} = useApp();
 
 	//useStates dos inputs
 	const [nome, setNome] = useState('')
@@ -22,7 +22,7 @@ const Form = ({newUser, teams, showModalNewTeam, setShowModalNewTeam}) => {
 	//função submit novo usuário
 	const formSubmit = (e) => {
 		e.preventDefault()
-		newUser({
+		addNewUser({
 			id: uuidv4(),
 			nome,
 			cargo,
@@ -71,7 +71,7 @@ const Form = ({newUser, teams, showModalNewTeam, setShowModalNewTeam}) => {
 					<InputSelect
 						label="Time"
 						id="time"
-						items={teams}
+						items={teams.map(time => time.nome)}
 						value={time}
 						hook={value => setTime(value)}
 					/>
