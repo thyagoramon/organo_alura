@@ -3,7 +3,6 @@ import twIcon from '@/assets/tw.png'
 import igIcon from '@/assets/ig.png'
 import logo from '@/assets/logo.png'
 import './Footer.css'
-import '@/index.css'
 
 const Footer = ({dev, link}) => {
 	return (

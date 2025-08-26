@@ -3,7 +3,6 @@ import { FaRegEdit, FaCheck  } from "react-icons/fa";
 import hexToRgba from 'hex-to-rgba'
 import UserCard from '../UserCard'
 import './Team.css'
-import '@/index.css'
 
 const Team = ({team, users, editColor, onDelete, onFav, editTeamName}) => {
 	const [editMode, setEditMode] = useState(false)

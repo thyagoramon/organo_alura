@@ -1,9 +1,10 @@
-:root {
-	--container: 1440px;
+import { createGlobalStyle } from "styled-components";
 
+const GlobalStyles = createGlobalStyle`
+  :root {
+	--container: 1440px;
   --fonte-prata: "Prata", serif;
   --fonte-montserrat: "Montserrat", sans-serif;
-
 	--cor-preto: #000;
   --cor-branco: #fff;
   --cor-violeta: #6278F7;
@@ -12,7 +13,6 @@
   --cor-cinza-medio: #a4a4a4;
   --cor-grafite: #212121;
   --cor-ciano: #95ffd4;
-
   --sombra-p: 4px 4px 12px rgba(0, 0, 0, 10%);
   --sombra-m: 8px 8px 12px rgba(0, 0, 0, 10%);
   --sombra-g: 12px 12px 12px rgba(0, 0, 0, 10%);
@@ -66,3 +66,6 @@ h3 {
   justify-content: start;
   align-items: center;
 }
+`;
+
+export default GlobalStyles;

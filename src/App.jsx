@@ -4,7 +4,6 @@ import Team from "./components/Team";
 import Footer from "./components/Footer";
 import ModalNewTeam from "./components/ModalNewTeam";
 import { useApp } from "./context/useApp";
-import "./index.css";
 
 export default function App() {
   const {

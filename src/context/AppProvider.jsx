@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AppContext } from "./AppContext";
 import { appReducer } from "./appReducer";
-
+import GlobalStyles from "./GlobalStyles.jsx";
 
 export function AppProvider({ children, preload }) {
   const initialState = {
@@ -16,7 +16,7 @@ export function AppProvider({ children, preload }) {
         fav: true,
       },
     ],
-  
+
     teams: [
       {
         id: uuidv4(),
@@ -54,10 +54,10 @@ export function AppProvider({ children, preload }) {
         cor: "#FF8A29",
       },
     ],
-    
+
     showModalNewTeam: false,
   };
-  
+
   const [state, dispatch] = useReducer(appReducer, preload ?? initialState);
 
   //adicionar novo usuário
@@ -135,5 +135,10 @@ export function AppProvider({ children, preload }) {
     initialState,
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>
+      <GlobalStyles/>
+      {children}
+    </AppContext.Provider>
+  );
 }
