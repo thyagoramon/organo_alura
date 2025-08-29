@@ -1,9 +1,27 @@
-import "./Button.css"
+import styled from "styled-components";
 
-const Button = ({children}) => {
-	return (
-		<button type="submit" className="Button">{children}</button>
-	)
-}
+const ButtonStyled = styled.button`
+  background-color: var(--cor-violeta);
+  color: var(--cor-branco);
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--sombra-p);
+  &:hover {
+    color: var(--cor-ciano);
+  }
+`;
 
-export default Button
+const Button = ({ children }) => {
+  return (
+    <ButtonStyled type="submit" className="Button">
+      {children}
+    </ButtonStyled>
+  );
+};
+
+export default Button;

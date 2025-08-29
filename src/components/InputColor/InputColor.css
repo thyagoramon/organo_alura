@@ -1,8 +1,0 @@
-.input-color {
-	width: 100%;
-	display: flex;
-	gap: 12px;
-	input {
-		cursor: pointer;
-	}
-}

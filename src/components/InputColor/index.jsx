@@ -1,14 +1,22 @@
+import styled from "styled-components"
 import Label from "../Label"
-import "./InputColor.css"
 
-const InputColor = (props) => {
-	
+const InputColorStyled = styled.div`
+	width: 100%;
+	display: flex;
+	gap: 1rem;
+	input {
+		cursor: pointer;
+	}
+`
+
+const InputColor = (props) => {	
 	const changing = (e) => {
 		props.hook(e.target.value)
 	}
 
 	return (
-		<div className="input-color">
+		<InputColorStyled>
 			<Label id={props.id}>{props.label}</Label>
 			<input
 				value={props.value}
@@ -16,7 +24,7 @@ const InputColor = (props) => {
 				type="color"
 				id={props.id}
 			/>
-		</div>
+		</InputColorStyled>
 	)
 }
 
