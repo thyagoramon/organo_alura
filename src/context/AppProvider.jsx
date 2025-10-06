@@ -16,7 +16,8 @@ export function AppProvider({ children, preload }) {
         fav: true,
       },
     ],
-
+    
+    /*
     teams: [
       {
         id: uuidv4(),
@@ -54,6 +55,7 @@ export function AppProvider({ children, preload }) {
         cor: "#FF8A29",
       },
     ],
+    */
 
     showModalNewTeam: false,
   };
@@ -78,7 +80,8 @@ export function AppProvider({ children, preload }) {
     dispatch({ type: "DELETE_USER", payload: { id } });
   };
 
-  //adicionar time
+  /*
+  //adicionar time  
   const addNewTeam = (team) => {
     const name = team.nome?.trim().toLowerCase();
     const exists = state.teams.some(
@@ -93,12 +96,16 @@ export function AppProvider({ children, preload }) {
       `Time criado com sucesso, agora '${team.nome}' está disponível na opção 'Time' ao criar um novo usuário`
     );
   };
+  */
 
+  /*
   //alterar cor do time
   const teamColor = (cor, id) => {
     dispatch({ type: "SET_TEAM_COLOR", payload: { id, cor } });
   };
+  */
 
+  /*
   //editar nome do time
   const editTeamName = (newName, oldName, id) => {
     if (newName === oldName) return;
@@ -110,6 +117,7 @@ export function AppProvider({ children, preload }) {
     }
     dispatch({ type: "EDIT_TEAM_NAME", payload: { id, newName, oldName } });
   };
+  */
 
   //favoritar
   const favoriting = (id) => {
@@ -127,9 +135,6 @@ export function AppProvider({ children, preload }) {
     showModalNewTeam: state.showModalNewTeam,
     addNewUser,
     deleteUser,
-    addNewTeam,
-    teamColor,
-    editTeamName,
     favoriting,
     setShowModalNewTeam,
     initialState,
