@@ -3,17 +3,19 @@ import { FaRegEdit, FaCheck } from "react-icons/fa";
 import hexToRgba from "hex-to-rgba";
 import UserCard from "../UserCard";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { editTeamColor, editTeamName } from "@/store/teamsSlice";
 
 const TeamStyled = styled.section`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding-top: 2rem;
-	padding-bottom: 3rem;
-	gap: 2rem;
-	width: 100%;
-	position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  gap: 2rem;
+  width: 100%;
+  position: relative;
 
   .team-colors {
     position: absolute;
@@ -73,12 +75,15 @@ const TeamStyled = styled.section`
   }
 `;
 
-const Team = ({ team, users, editColor, onDelete, onFav, editTeamName }) => {
+const Team = ({ team, users }) => {
+  const inputRef = useRef(null);
+  const dispatch = useDispatch();  
+
+  //useStates:
   const [editMode, setEditMode] = useState(false);
   const [newTeamName, setNewTeamName] = useState(team.nome);
-  const inputRef = useRef(null);
 
-  //coloca o input em foco quando o mode de edição estiver ativo
+  //coloca o input em foco quando o modo de edição tá ativo
   useEffect(() => {
     if (editMode && inputRef.current) {
       inputRef.current.focus();
@@ -90,78 +95,71 @@ const Team = ({ team, users, editColor, onDelete, onFav, editTeamName }) => {
     setNewTeamName(team.nome);
   }, [team.nome]);
 
-  //função para ativar o modo de edição
-  const onStartEdit = () => {
-    setEditMode(true);
+  //função para editar nome do time
+  const editName = () => {
+    setEditMode(false);
+    const edit = {id: team.id, newName: newTeamName}
+    dispatch(editTeamName(edit));
   };
 
-  //função para finalizar a edição
-  const onEndEdit = () => {
-    setEditMode(false);
-    editTeamName(newTeamName, team.nome, team.id);
-    setNewTeamName(team.nome);
+  //função para editar cor do time
+  const editColor = (color) => {
+    const edit = {id: team.id, color: color}
+    dispatch(editTeamColor(edit));
   };
 
   return (
-    users.length > 0 && (
-      //renderização condicional
+    <TeamStyled style={{ backgroundColor: hexToRgba(team.cor, 0.25) }}>
+      <div className="team-colors">
+        <p>Cor do time: </p>
+        <input
+          onChange={(e) => editColor(e.target.value)}
+          value={team.cor}
+          type="color"
+          className="team-color"
+        />
+      </div>
 
-      <TeamStyled
-        style={{ backgroundColor: hexToRgba(team.cor, 0.25) }}
-      >
-        <div className="team-colors">
-          <p>Cor do time: </p>
+      {editMode ? (
+        <div className="team-name">
           <input
-            onChange={(e) => editColor(e.target.value, team.id)}
-            value={team.cor}
-            type="color"
-            className="team-color"
+            className="team-editInput"
+            type="text"
+            value={newTeamName}
+            onChange={(e) => setNewTeamName(e.target.value)}
+            style={{ borderColor: team.cor }}
+            ref={inputRef}
+            onBlur={editName}
           />
+          <button className="team-edit" onClick={editName}>
+            <FaCheck />
+          </button>
         </div>
-
-        {editMode ? (
-          <div className="team-name">
-            <input
-              className="team-editInput"
-              type="text"
-              value={newTeamName}
-              onChange={(e) => setNewTeamName(e.target.value)}
-              style={{ borderColor: team.cor }}
-              ref={inputRef}
-              onBlur={onEndEdit}
-            />
-            <button className="team-edit" onClick={onEndEdit}>
-              <FaCheck />
-            </button>
-          </div>
-        ) : (
-          <div className="team-name">
-            <h3 className="team-title" style={{ borderColor: team.cor }}>
-              {team.nome}
-            </h3>
-            <button className="team-edit" onClick={onStartEdit}>
-              <FaRegEdit />
-            </button>
-          </div>
-        )}
-
-        <div className="team-list container">
-          {users.map((user) => (
-            <UserCard
-              key={user.id}
-              id={user.id}
-              nome={user.nome}
-              cargo={user.cargo}
-              imagem={user.imagem}
-              cor={team.cor}
-              aoDeletar={onDelete}
-              fav={user.fav}
-              onFav={onFav}
-            />
-          ))}
+      ) : (
+        <div className="team-name">
+          <h3 className="team-title" style={{ borderColor: team.cor }}>
+            {team.nome}
+          </h3>
+          <button className="team-edit" onClick={() => setEditMode(true)}>
+            <FaRegEdit />
+          </button>
         </div>
-      </TeamStyled>
-    )
+      )}
+
+      <div className="team-list container">
+        {users.map((user) => (
+          <UserCard
+            key={user.id}
+            id={user.id}
+            nome={user.nome}
+            cargo={user.cargo}
+            imagem={user.imagem}
+            cor={team.cor}
+            fav={user.fav}
+          />
+        ))}
+      </div>
+    </TeamStyled>
   );
 };
 

@@ -56,12 +56,14 @@ const teamsSlice = createSlice({
     },
 
     editTeamColor: (state, { payload }) => {
+      //payload: id, color
       const { id, color } = payload;
       const teamToChange = state.find((team) => team.id === id);
       teamToChange.cor = color;
     },
 
     editTeamName: (state, { payload }) => {
+      //payload: id, newName
       const { id, newName } = payload;
       const teamToChange = state.find((team) => team.id === id);
       teamToChange.nome = newName;

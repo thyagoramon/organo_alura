@@ -1,18 +1,20 @@
 import styled from "styled-components";
 import { IoMdCloseCircle, IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { deleteUser, favoriting } from "@/store/usersSlice";
 
 const UserCardStyled = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
 
-	border-radius: 1rem;
-	width: 260px;
-	box-sizing: border-box;
-	background-color: var(--cor-branco);
-	box-shadow: var(--sombra-m);
+  border-radius: 1rem;
+  width: 260px;
+  box-sizing: border-box;
+  background-color: var(--cor-branco);
+  box-shadow: var(--sombra-m);
 
   .userCard-delete {
     font-size: 1.5rem;
@@ -77,28 +79,30 @@ const UserCardStyled = styled.div`
   }
 `;
 
-const UserCard = (props) => {
+const UserCard = ({ id, nome, cargo, imagem, cor, fav }) => {
+  const dispatch = useDispatch();
+
   return (
     <UserCardStyled>
       <IoMdCloseCircle
         className="userCard-delete"
-        onClick={() => props.aoDeletar(props.id)}
+        onClick={() => dispatch(deleteUser(id))}
       />
-      <div className="userCard-top" style={{ backgroundColor: props.cor }}>
-        <img src={props.imagem} alt={props.nome} />
+      <div className="userCard-top" style={{ backgroundColor: cor }}>
+        <img src={imagem} alt={nome} />
       </div>
       <div className="userCard-botton">
-        <h4>{props.nome}</h4>
-        <h5>{props.cargo}</h5>
+        <h4>{nome}</h4>
+        <h5>{cargo}</h5>
         <div className="userCard-fav">
-          {props.fav ? (
+          {fav ? (
             <IoIosHeart
-              onClick={() => props.onFav(props.id)}
+              onClick={() => dispatch(favoriting(id))}
               className="fav-true"
             />
           ) : (
             <IoIosHeartEmpty
-              onClick={() => props.onFav(props.id)}
+              onClick={() => dispatch(favoriting(id))}
               className="fav-false"
             />
           )}

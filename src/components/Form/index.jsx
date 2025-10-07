@@ -1,13 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
-import { MdModeEdit } from "react-icons/md";
-import { FaPlus } from "react-icons/fa";
-import { useApp } from "@/context/useApp";
 import InputText from "../InputText";
 import InputSelect from "../InputSelect";
 import Button from "../Button";
-import SimpleButton from "../SimpleButton";
+import { useDispatch, useSelector } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+import { addNewUser } from "@/store/usersSlice";
 
 const FormStyled = styled.section`
 	display: flex;
@@ -26,18 +24,13 @@ const FormStyled = styled.section`
     justify-content: flex-start;
     gap: 1.5rem;
   }
-
-  .form-time {
-    display: flex;
-    align-items: flex-end;
-    gap: 1rem;
-  }
 `;
 
 const Form = () => {
-  const { teams, setShowModalNewTeam, addNewUser } = useApp();
+  const dispatch = useDispatch();
+  const teams = useSelector((state) => state.teams)
 
-  //useStates dos inputs
+  //useState dos inputs
   const [nome, setNome] = useState("");
   const [cargo, setCargo] = useState("");
   const [imagem, setImagem] = useState("");
@@ -46,14 +39,19 @@ const Form = () => {
   //função submit novo usuário
   const formSubmit = (e) => {
     e.preventDefault();
-    addNewUser({
-      id: uuidv4(),
+    
+    //dados
+    const newUser = {
+      id: nanoid(),
       nome,
       cargo,
       imagem,
       time,
       fav: false,
-    });
+    }
+
+    //enviar dados para store
+    dispatch(addNewUser(newUser))
 
     //limpar inputs após envio
     setNome("");
@@ -91,22 +89,13 @@ const Form = () => {
           value={imagem}
           hook={(value) => setImagem(value)}
         />
-        <div className="form-time">
-          <InputSelect
-            label="Time"
-            id="time"
-            items={teams.map((time) => time.nome)}
-            value={time}
-            hook={(value) => setTime(value)}
-          />
-          <SimpleButton onClick={() => setShowModalNewTeam(true)}>
-            <FaPlus />
-          </SimpleButton>
-          <SimpleButton>
-            <MdModeEdit />
-          </SimpleButton>
-        </div>
-
+        <InputSelect
+          label="Time"
+          id="time"
+          items={teams.map((time) => time.nome)}
+          value={time}
+          hook={(value) => setTime(value)}
+        />
         <Button>Novo usuário</Button>
       </form>
     </FormStyled>

@@ -2,20 +2,11 @@ import Banner from "./components/Banner";
 import Form from "./components/Form";
 import Team from "./components/Team";
 import Footer from "./components/Footer";
-import ModalNewTeam from "./components/ModalNewTeam";
-import { useApp } from "./context/useApp";
+import { useSelector } from "react-redux";
 
 export default function App() {
-  const {
-    teams,
-    users,
-    showModalNewTeam,
-    setShowModalNewTeam,
-    deleteUser,
-    favoriting,
-    teamColor,
-    editTeamName,
-  } = useApp();
+  const teams = useSelector((state) => state.teams);
+  const users = useSelector((state) => state.users);
 
   return (
     <>
@@ -28,19 +19,11 @@ export default function App() {
           <Team
             key={team.id}
             team={team}
-            editColor={teamColor}
-            users={users.filter((user) => user.time === team.nome)}
-            onDelete={deleteUser}
-            onFav={favoriting}
-            editTeamName={editTeamName}
+            users={users.filter(user => user.time === team.nome)}
           />
         ))}
       </section>
       <Footer dev="Thyago Ramon" link="https://github.com/thyagoramon" />
-      <ModalNewTeam
-        showModalNewTeam={showModalNewTeam}
-        setShowModalNewTeam={setShowModalNewTeam}
-      />
     </>
   );
 }
