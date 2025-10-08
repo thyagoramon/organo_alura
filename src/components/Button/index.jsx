@@ -16,9 +16,9 @@ const ButtonStyled = styled.button`
   }
 `;
 
-const Button = ({ children }) => {
+const Button = ({ children, onClick }) => {
   return (
-    <ButtonStyled type="submit" className="Button">
+    <ButtonStyled type="submit" className="Button" onClick={onClick}>
       {children}
     </ButtonStyled>
   );

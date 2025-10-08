@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IoMdCloseCircle, IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { deleteUser, favoriting } from "@/store/usersSlice";
+import CloseButton from "../CloseButton";
 
 const UserCardStyled = styled.div`
   display: flex;
@@ -77,6 +78,12 @@ const UserCardStyled = styled.div`
       color: var(--cor-cinza-medio);
     }
   }
+
+  .closeButton {
+    position: absolute;
+    right: 0.3rem;
+    top: 0.3rem;
+  }
 `;
 
 const UserCard = ({ id, nome, cargo, imagem, cor, fav }) => {
@@ -84,10 +91,7 @@ const UserCard = ({ id, nome, cargo, imagem, cor, fav }) => {
 
   return (
     <UserCardStyled>
-      <IoMdCloseCircle
-        className="userCard-delete"
-        onClick={() => dispatch(deleteUser(id))}
-      />
+      <div className="closeButton"><CloseButton onClick={() => dispatch(deleteUser(id))}/></div>
       <div className="userCard-top" style={{ backgroundColor: cor }}>
         <img src={imagem} alt={nome} />
       </div>

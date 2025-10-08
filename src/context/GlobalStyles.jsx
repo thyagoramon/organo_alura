@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
   margin: 0;
   padding: 0;
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 body {  
@@ -58,6 +59,10 @@ h3 {
 
 .container {
   max-width: var(--container);
+}
+
+.gap {
+  gap: 16px;
 }
 
 #root {

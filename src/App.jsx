@@ -1,25 +1,45 @@
 import Banner from "./components/Banner";
-import Form from "./components/Form";
 import Team from "./components/Team";
 import Footer from "./components/Footer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "./components/Button";
+import Modal from "./components/Modal";
+import { changeModal } from "./store/modalSlice";
+import FormNewUser from "./components/FormNewUser";
 
 export default function App() {
+  const dispatch = useDispatch();
   const teams = useSelector((state) => state.teams);
   const users = useSelector((state) => state.users);
 
   return (
     <>
+      <Modal modalName={"modalNewUser"}><FormNewUser /></Modal>
+      <Modal modalName={"modalNewTeam"}>Novo time</Modal>
+
       <Banner />
-      <section className="section padding container">
-        <Form />
+      <section className="section padding container gap">
+        <Button
+          onClick={() =>
+            dispatch(changeModal({ modal: "modalNewUser", open: true }))
+          }
+        >
+          Novo Usuário
+        </Button>
+        <Button
+          onClick={() =>
+            dispatch(changeModal({ modal: "modalNewTeam", open: true }))
+          }
+        >
+          Novo Time
+        </Button>
       </section>
       <section className="section">
         {teams.map((team) => (
           <Team
             key={team.id}
             team={team}
-            users={users.filter(user => user.time === team.nome)}
+            users={users.filter((user) => user.time === team.nome)}
           />
         ))}
       </section>
