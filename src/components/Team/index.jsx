@@ -155,7 +155,6 @@ const Team = ({ team, users }) => {
             cargo={user.cargo}
             imagem={user.imagem}
             cor={team.cor}
-            fav={user.fav}
           />
         ))}
       </div>

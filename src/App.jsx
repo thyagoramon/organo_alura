@@ -6,6 +6,7 @@ import Button from "./components/Button";
 import Modal from "./components/Modal";
 import { changeModal } from "./store/modalSlice";
 import FormNewUser from "./components/FormNewUser";
+import FormEditUser from "./components/FormEditUser";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <>
       <Modal modalName={"modalNewUser"}><FormNewUser /></Modal>
+      <Modal modalName={"modalEditUser"}><FormEditUser /></Modal>
       <Modal modalName={"modalNewTeam"}>Novo time</Modal>
 
       <Banner />
@@ -26,6 +28,7 @@ export default function App() {
         >
           Novo Usuário
         </Button>
+
         <Button
           onClick={() =>
             dispatch(changeModal({ modal: "modalNewTeam", open: true }))

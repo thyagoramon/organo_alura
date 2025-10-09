@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { IoMdCloseCircle, IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { deleteUser, favoriting } from "@/store/usersSlice";
+import { deleteUser } from "@/store/usersSlice";
 import CloseButton from "../CloseButton";
+import EditButton from "../EditButton";
+import { changeModal } from "@/store/modalSlice";
 
 const UserCardStyled = styled.div`
   display: flex;
@@ -63,54 +64,34 @@ const UserCardStyled = styled.div`
     }
   }
 
-  .userCard-fav {
-    margin-top: 0.5rem;
-    font-size: 1.5rem;
-
-    .fav-true,
-    .fav-false {
-      cursor: pointer;
-    }
-    .fav-true {
-      color: var(--cor-vermelho);
-    }
-    .fav-false {
-      color: var(--cor-cinza-medio);
-    }
-  }
-
   .closeButton {
     position: absolute;
     right: 0.3rem;
     top: 0.3rem;
   }
+  
+  .editButton {
+    position: absolute;
+    left: 0.6rem;
+    top: 0.3rem;
+  }
 `;
 
-const UserCard = ({ id, nome, cargo, imagem, cor, fav }) => {
-  const dispatch = useDispatch();
+const UserCard = ({ id, nome, cargo, imagem, cor }) => {
+  const dispatch = useDispatch();  
 
   return (
     <UserCardStyled>
-      <div className="closeButton"><CloseButton onClick={() => dispatch(deleteUser(id))}/></div>
+      <div className="editButton" title="Editar usuário"><EditButton onClick={() => dispatch(changeModal({ modal: "modalEditUser", open: true, data: id }))}/></div>
+      <div className="closeButton" title="Remover usuário"><CloseButton onClick={() => dispatch(deleteUser(id))}/></div>
+
       <div className="userCard-top" style={{ backgroundColor: cor }}>
         <img src={imagem} alt={nome} />
       </div>
+
       <div className="userCard-botton">
         <h4>{nome}</h4>
-        <h5>{cargo}</h5>
-        <div className="userCard-fav">
-          {fav ? (
-            <IoIosHeart
-              onClick={() => dispatch(favoriting(id))}
-              className="fav-true"
-            />
-          ) : (
-            <IoIosHeartEmpty
-              onClick={() => dispatch(favoriting(id))}
-              className="fav-false"
-            />
-          )}
-        </div>
+        <h5>{cargo}</h5>        
       </div>
     </UserCardStyled>
   );

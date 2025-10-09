@@ -4,11 +4,10 @@ import InputText from "../InputText";
 import InputSelect from "../InputSelect";
 import Button from "../Button";
 import { useDispatch, useSelector } from "react-redux";
-import { nanoid } from "@reduxjs/toolkit";
-import { addNewUser } from "@/store/usersSlice";
+import { editUser } from "@/store/usersSlice";
 import { changeModal } from "@/store/modalSlice";
 
-const FormNewUserStyled = styled.form`
+const FormEditUserStyled = styled.form`
 	width: 100%;
 	display: flex;
   flex-direction: column;
@@ -16,23 +15,26 @@ const FormNewUserStyled = styled.form`
   gap: 1.5rem;
 `;
 
-const FormNewUser = () => {
+const FormEditUser = () => {
   const dispatch = useDispatch();
-  const teams = useSelector((state) => state.teams)
-
+  const teams = useSelector((state) => state.teams);
+  const userId = useSelector((state) => state.modal.modalData);
+  const user = useSelector((state) => state.users.find(user => user.id === userId));
+    
   //useState dos inputs
-  const [nome, setNome] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [imagem, setImagem] = useState("");
-  const [time, setTime] = useState("");
+  const [nome, setNome] = useState(user.nome);
+  const [cargo, setCargo] = useState(user.cargo);
+  const [imagem, setImagem] = useState(user.imagem);
+  const [time, setTime] = useState(user.time);
+  const id = user.id;
 
   //função submit novo usuário
   const formSubmit = (e) => {
     e.preventDefault();
     
     //dados
-    const newUser = {
-      id: nanoid(),
+    const editedUser = {
+      id,
       nome,
       cargo,
       imagem,
@@ -40,7 +42,7 @@ const FormNewUser = () => {
     }
 
     //enviar dados para store
-    dispatch(addNewUser(newUser))
+    dispatch(editUser(editedUser))
 
     //limpar inputs após envio
     setNome("");
@@ -49,13 +51,13 @@ const FormNewUser = () => {
     setTime("");
 
     //fechar modal
-    dispatch(changeModal({modal: "modalNewUser", open: false}))
+    dispatch(changeModal({modal: "modalEditUser", open: false}))
   };
 
   //componente
   return (
-    <FormNewUserStyled onSubmit={formSubmit}>
-      <h3>Preencha os dados do novo usuário</h3>
+    <FormEditUserStyled onSubmit={formSubmit}>
+      <h3>Dados do usuário</h3>
       <InputText
         label="Nome"
         id="nome"
@@ -88,8 +90,8 @@ const FormNewUser = () => {
         hook={(value) => setTime(value)}
       />
       <Button>Salvar</Button>
-    </FormNewUserStyled>
+    </FormEditUserStyled>
   );
 };
 
-export default FormNewUser;
+export default FormEditUser;

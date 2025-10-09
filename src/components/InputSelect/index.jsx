@@ -30,18 +30,19 @@ const InputSelectStyled = styled.div`
   }
 `;
 
-const InputSelect = (props) => {
+const InputSelect = ({hook, id, label, value, items}) => {
   const changing = (e) => {
-    props.hook(e.target.value);
+    hook(e.target.value);
   };
+
 
   return (
     <InputSelectStyled className="InputSelect">
-      <Label id={props.id}>{props.label}</Label>
-      <select required id={props.id} value={props.value} onChange={changing}>
+      <Label id={id}>{label}</Label>
+      <select required id={id} value={value} onChange={changing}>
         <option value="">Selecione um time</option>
-        {props.items.map((item) => (
-          <option key={item}>{item}</option>
+        {items.map((item) => (
+          <option key={item} value={item}>{item}</option>
         ))}
       </select>
     </InputSelectStyled>
