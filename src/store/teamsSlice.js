@@ -3,38 +3,13 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 const teams = [
   {
     id: nanoid(),
-    nome: "Programação",
-    cor: "#57c278",
-  },
-  {
-    id: nanoid(),
     nome: "Front-end",
     cor: "#82CFFA",
   },
   {
     id: nanoid(),
-    nome: "Data Science",
-    cor: "#A6D157",
-  },
-  {
-    id: nanoid(),
-    nome: "Devops",
-    cor: "#E06B69",
-  },
-  {
-    id: nanoid(),
-    nome: "UX e Design",
-    cor: "#DB6EBF",
-  },
-  {
-    id: nanoid(),
-    nome: "Mobile",
-    cor: "#FFBA05",
-  },
-  {
-    id: nanoid(),
-    nome: "Inovação e gestão",
-    cor: "#FF8A29",
+    nome: "Back-end",
+    cor: "#57c278",
   },
 ];
 
@@ -44,6 +19,8 @@ const teamsSlice = createSlice({
   reducers: {
     addNewTeam: (state, { payload }) => {
       const name = payload.trim().toLowerCase();
+      
+      //remover validação
       const exists = state.some(
         (team) => team.nome.trim().toLocaleLowerCase() === name
       );

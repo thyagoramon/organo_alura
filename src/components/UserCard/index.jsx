@@ -82,7 +82,9 @@ const UserCard = ({ id, nome, cargo, imagem, cor }) => {
 
   return (
     <UserCardStyled>
-      <div className="editButton" title="Editar usuário"><EditButton onClick={() => dispatch(changeModal({ modal: "modalEditUser", open: true, data: id }))}/></div>
+      <div className="editButton" title="Editar usuário">
+        <EditButton onClick={() => dispatch(changeModal({ modal: "modalEditUser", open: true, data: id }))}/>
+      </div>
       <div className="closeButton" title="Remover usuário"><CloseButton onClick={() => dispatch(deleteUser(id))}/></div>
 
       <div className="userCard-top" style={{ backgroundColor: cor }}>

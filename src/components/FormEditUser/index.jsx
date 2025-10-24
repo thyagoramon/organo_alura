@@ -19,7 +19,8 @@ const FormEditUser = () => {
   const dispatch = useDispatch();
   const teams = useSelector((state) => state.teams);
   const userId = useSelector((state) => state.modal.modalData);
-  const user = useSelector((state) => state.users.find(user => user.id === userId));
+  const users = useSelector((state) => state.users);
+  const user = users.find(user => user.id === userId);
     
   //useState dos inputs
   const [nome, setNome] = useState(user.nome);
@@ -32,7 +33,22 @@ const FormEditUser = () => {
   const formSubmit = (e) => {
     e.preventDefault();
     
-    //dados
+    //validação do nome, apenas se mudar
+    const newName = nome.trim().toLowerCase();
+    const currentName = user.nome.toLowerCase();
+    const nameChanged = newName !== currentName
+
+    if (nameChanged) {
+      const exist = users.some(
+        (user) => user.nome.trim().toLocaleLowerCase() === newName
+      );
+      if (exist) {
+        alert(`'${nome}' já está na lista de usuários, tente outro nome`);
+        return;
+      }
+    }
+
+    //preparação dos dados
     const editedUser = {
       id,
       nome,
@@ -41,16 +57,16 @@ const FormEditUser = () => {
       time,
     }
 
-    //enviar dados para store
-    dispatch(editUser(editedUser))
+    //envio dos dados para o store
+    dispatch(editUser(editedUser))  
 
-    //limpar inputs após envio
+    //limpeza dos inputs após envio
     setNome("");
     setCargo("");
     setImagem("");
     setTime("");
 
-    //fechar modal
+    //fechamento da modal
     dispatch(changeModal({modal: "modalEditUser", open: false}))
   };
 
@@ -89,7 +105,7 @@ const FormEditUser = () => {
         value={time}
         hook={(value) => setTime(value)}
       />
-      <Button>Salvar</Button>
+      <Button type="submit">Salvar</Button>
     </FormEditUserStyled>
   );
 };

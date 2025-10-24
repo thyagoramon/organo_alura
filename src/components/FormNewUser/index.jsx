@@ -19,6 +19,7 @@ const FormNewUserStyled = styled.form`
 const FormNewUser = () => {
   const dispatch = useDispatch();
   const teams = useSelector((state) => state.teams)
+  const users = useSelector((state) => state.users)
 
   //useState dos inputs
   const [nome, setNome] = useState("");
@@ -30,6 +31,18 @@ const FormNewUser = () => {
   const formSubmit = (e) => {
     e.preventDefault();
     
+    //validação do nome
+    const newName = nome.trim().toLowerCase();
+
+    const exist = users.some(
+      (user) => user.nome.trim().toLocaleLowerCase() === newName
+    );
+
+    if (exist) {
+      alert(`'${nome}' já está na lista de usuários, tente outro nome`);
+      return;
+    }
+
     //dados
     const newUser = {
       id: nanoid(),
@@ -87,7 +100,7 @@ const FormNewUser = () => {
         value={time}
         hook={(value) => setTime(value)}
       />
-      <Button>Salvar</Button>
+      <Button type="submit">Salvar</Button>
     </FormNewUserStyled>
   );
 };
