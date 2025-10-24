@@ -6,6 +6,7 @@ const InputSelectStyled = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: relative;
+  gap: 1rem;
 	select {
 		appearance: none;
 		background-color: #fff;

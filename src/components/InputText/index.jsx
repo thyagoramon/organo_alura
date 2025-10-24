@@ -5,6 +5,7 @@ const InputTextStyled = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 
   input {
     background-color: var(--cor-branco);
@@ -28,6 +29,7 @@ const InputText = (props) => {
   return (
     <InputTextStyled className="input-text">
       <Label id={props.id}>{props.label}</Label>
+
       <input
         value={props.value}
         onChange={changing}

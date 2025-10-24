@@ -7,6 +7,7 @@ import Modal from "./components/Modal";
 import { changeModal } from "./store/modalSlice";
 import FormNewUser from "./components/FormNewUser";
 import FormEditUser from "./components/FormEditUser";
+import FormNewTeam from "./components/FormNewTeam";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function App() {
     <>
       <Modal modalName={"modalNewUser"}><FormNewUser /></Modal>
       <Modal modalName={"modalEditUser"}><FormEditUser /></Modal>
-      <Modal modalName={"modalNewTeam"}>Novo time</Modal>
+      <Modal modalName={"modalNewTeam"}><FormNewTeam /></Modal>
 
       <Banner />
       <section className="section padding container gap">

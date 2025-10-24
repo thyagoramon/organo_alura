@@ -3,8 +3,10 @@ import { FaRegEdit, FaCheck } from "react-icons/fa";
 import hexToRgba from "hex-to-rgba";
 import UserCard from "../UserCard";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editTeamColor, editTeamName } from "@/store/teamsSlice";
+import { MdCancel } from "react-icons/md";
+import { updateUsersTeam } from "@/store/usersSlice";
 
 const TeamStyled = styled.section`
   display: flex;
@@ -59,6 +61,17 @@ const TeamStyled = styled.section`
     color: var(--cor-cinza-medio);
     cursor: pointer;
   }
+  
+  .team-cancel {
+    position: absolute;
+    bottom: 0;
+    right: -2.1rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--cor-cinza-medio);
+    cursor: pointer;
+  }
 
   .team-editInput {
     background-color: rgba(255, 255, 255, 0.75);
@@ -77,7 +90,8 @@ const TeamStyled = styled.section`
 
 const Team = ({ team, users }) => {
   const inputRef = useRef(null);
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
+  const teams = useSelector(state => state.teams)
 
   //useStates:
   const [editMode, setEditMode] = useState(false);
@@ -97,10 +111,45 @@ const Team = ({ team, users }) => {
 
   //função para editar nome do time
   const editName = () => {
+    //validação de nome vazio
+    if (newTeamName.trim() === '') {
+      alert('Nome inválido, tente novamente')
+      return
+    }
+    
+    //validação de nome repetido
+    const changed = newTeamName.trim().toLowerCase() !== team.nome.toLowerCase();
+    if (changed) {
+      const exist = teams.find(team => team.nome.toLowerCase() === newTeamName.trim().toLowerCase())
+      if (exist) {
+        alert('Este nome já está sendo usado por outro time, tente outro nome')
+        return
+      }
+    }    
+
+    //atualizar nome
+    const editTeam = {
+      id: team.id,
+      newName: newTeamName,
+    }
+    dispatch(editTeamName(editTeam));
+    
+    //atualizar usuários
+    const editUsersTeam = {
+      newTeamName: newTeamName,
+      oldTeamName: team.nome,
+    }
+    dispatch(updateUsersTeam(editUsersTeam));
+
+    //sair do modo de edição
     setEditMode(false);
-    const edit = {id: team.id, newName: newTeamName}
-    dispatch(editTeamName(edit));
   };
+
+  //função para cancelar a edição e restaurar nome anterior
+  const cancelEditName = () => {
+    setEditMode(false);
+    setNewTeamName(team.nome);
+  }
 
   //função para editar cor do time
   const editColor = (color) => {
@@ -129,10 +178,12 @@ const Team = ({ team, users }) => {
             onChange={(e) => setNewTeamName(e.target.value)}
             style={{ borderColor: team.cor }}
             ref={inputRef}
-            onBlur={editName}
           />
           <button className="team-edit" onClick={editName}>
             <FaCheck />
+          </button>
+          <button className="team-cancel" onClick={cancelEditName}>
+            <MdCancel />
           </button>
         </div>
       ) : (

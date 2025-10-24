@@ -4,25 +4,28 @@ import Label from "../Label"
 const InputColorStyled = styled.div`
 	width: 100%;
 	display: flex;
+	align-items: center;
 	gap: 1rem;
+
 	input {
 		cursor: pointer;
 	}
 `
 
-const InputColor = (props) => {	
+const InputColor = ({ hook, id, label, value }) => {
 	const changing = (e) => {
-		props.hook(e.target.value)
+		hook(e.target.value)
 	}
 
 	return (
 		<InputColorStyled>
-			<Label id={props.id}>{props.label}</Label>
+			<Label id={id}>{label}</Label>
+
 			<input
-				value={props.value}
+				value={value}
 				onChange={changing}
 				type="color"
-				id={props.id}
+				id={id}
 			/>
 		</InputColorStyled>
 	)

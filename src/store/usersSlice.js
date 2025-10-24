@@ -6,14 +6,14 @@ const users = [
     nome: "Thyago",
     cargo: "Desenvolvedor front-end",
     imagem: "http://github.com/thyagoramon.png",
-    time: "Front-end",
+    time: "teste 1",
   },
   {
     id: nanoid(),
     nome: "Ramon",
     cargo: "Desenvolvedor front-end",
     imagem: "http://github.com/thyagoramon.png",
-    time: "Front-end",
+    time: "teste 1",
   },
 ];
 
@@ -36,8 +36,20 @@ const usersSlice = createSlice({
       const index = state.findIndex(user => user.id === payload.id)
       state[index] = {...payload}
     },
+    updateUsersTeam: (state, { payload }) => {
+      //payload: {newTeamName, oldTeamName}
+
+      const {newTeamName, oldTeamName} = payload;
+
+      //alterar time
+      state.map(user => {
+        if (user.time === oldTeamName) {
+          return user.time = newTeamName
+        }
+      })
+    }
   },
 });
 
-export const { addNewUser, deleteUser, editUser } = usersSlice.actions;
+export const { addNewUser, deleteUser, editUser, updateUsersTeam } = usersSlice.actions;
 export default usersSlice.reducer;

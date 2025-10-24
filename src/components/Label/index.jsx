@@ -3,7 +3,6 @@ import styled from "styled-components";
 const LabelStyled = styled.label`
   font-weight: bold;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
 `;
 
 const Label = (props) => {
