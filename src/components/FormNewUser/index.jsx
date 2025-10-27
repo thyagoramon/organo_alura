@@ -32,10 +32,15 @@ const FormNewUser = () => {
     e.preventDefault();
     
     //validação do nome
-    const newName = nome.trim().toLowerCase();
+    const newName = nome.trim();
+
+    if (newName === '') {
+      alert(`Nome inválido, tente outro nome`);
+      return;
+    }
 
     const exist = users.some(
-      (user) => user.nome.trim().toLocaleLowerCase() === newName
+      (user) => user.nome.toLowerCase() === newName.toLowerCase()
     );
 
     if (exist) {
@@ -46,7 +51,7 @@ const FormNewUser = () => {
     //dados
     const newUser = {
       id: nanoid(),
-      nome,
+      nome: newName,
       cargo,
       imagem,
       time,

@@ -29,10 +29,15 @@ const FormNewTeam = () => {
     e.preventDefault();
     
     //validação do nome
-    const teamName = nome.trim().toLowerCase();
+    const teamName = nome.trim();
+
+    if (teamName === '') {
+      alert(`Nome inválido, tente outro nome`);
+      return;
+    }
 
     const exist = teams.some(
-      (team) => team.nome.trim().toLocaleLowerCase() === teamName
+      (team) => team.nome.toLowerCase() === teamName.toLowerCase()
     );
 
     if (exist) {
@@ -43,7 +48,7 @@ const FormNewTeam = () => {
     //dados
     const newTeam = {
       id: nanoid(),
-      nome,
+      nome: teamName,
       cor,
     }
 

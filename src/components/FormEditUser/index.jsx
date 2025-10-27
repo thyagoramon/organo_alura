@@ -34,13 +34,18 @@ const FormEditUser = () => {
     e.preventDefault();
     
     //validação do nome, apenas se mudar
-    const newName = nome.trim().toLowerCase();
-    const currentName = user.nome.toLowerCase();
-    const nameChanged = newName !== currentName
+    const newName = nome.trim();
+
+    if (newName === '') {
+      alert(`Nome inválido, tente outro nome`);
+      return;
+    }
+
+    const nameChanged = newName.toLowerCase() !== user.nome.toLowerCase();
 
     if (nameChanged) {
       const exist = users.some(
-        (user) => user.nome.trim().toLocaleLowerCase() === newName
+        (user) => user.nome.trim().toLowerCase() === newName.toLowerCase()
       );
       if (exist) {
         alert(`'${nome}' já está na lista de usuários, tente outro nome`);
@@ -51,7 +56,7 @@ const FormEditUser = () => {
     //preparação dos dados
     const editedUser = {
       id,
-      nome,
+      nome: newName,
       cargo,
       imagem,
       time,

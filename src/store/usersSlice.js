@@ -36,6 +36,7 @@ const usersSlice = createSlice({
       const index = state.findIndex(user => user.id === payload.id)
       state[index] = {...payload}
     },
+    
     updateUsersTeam: (state, { payload }) => {
       //payload: {newTeamName, oldTeamName}
 

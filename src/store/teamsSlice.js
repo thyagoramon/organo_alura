@@ -22,21 +22,18 @@ const teamsSlice = createSlice({
       state.push(payload);
     },
 
-    editTeamColor: (state, { payload }) => {
-      //payload: {id, color}
-      const { id, color } = payload;
-      const teamToChange = state.find((team) => team.id === id);
-      teamToChange.cor = color;
+    editTeam: (state, { payload }) => {
+      //payload: objeto com dados do usuário
+      const index = state.findIndex(team => team.id === payload.id)
+      state[index] = {...payload}
     },
 
-    editTeamName: (state, { payload }) => {
-      //payload: {id, newName}
-      const { id, newName } = payload;
-      const teamToChange = state.find((team) => team.id === id);
-      teamToChange.nome = newName;
-    },
+    removeTeam: (state, { payload }) => {
+      //payload: id do time
+      return state.filter((team) => team.id !== payload);
+    }
   },
 });
 
-export const { addNewTeam, editTeamColor, editTeamName } = teamsSlice.actions;
+export const { addNewTeam, editTeam, removeTeam } = teamsSlice.actions;
 export default teamsSlice.reducer;

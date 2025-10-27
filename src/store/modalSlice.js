@@ -7,6 +7,7 @@ const modalSlice = createSlice({
     modalNewUser: false,
     modalNewTeam: false,
     modalEditUser: false,
+    modalEditTeam: false,
   },
   reducers: {
     changeModal: (state, { payload }) => {
