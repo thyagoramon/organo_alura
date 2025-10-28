@@ -13,7 +13,7 @@ const users = [
     nome: "Ramon",
     cargo: "Desenvolvedor front-end",
     imagem: "http://github.com/thyagoramon.png",
-    time: "teste 1",
+    time: 'teste 2',
   },
 ];
 

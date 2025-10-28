@@ -9,6 +9,9 @@ import FormNewUser from "./components/FormNewUser";
 import FormEditUser from "./components/FormEditUser";
 import FormNewTeam from "./components/FormNewTeam";
 import FormEditTeam from "./components/FormEditTeam";
+import FormRemoveTeam from "./components/FormRemoveTeam";
+import FormMoveUsers from "./components/FormMoveUsers";
+import UnallocatedUsers from "./components/UnallocatedUsers";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -21,6 +24,8 @@ export default function App() {
       <Modal modalName={"modalEditUser"}><FormEditUser /></Modal>
       <Modal modalName={"modalNewTeam"}><FormNewTeam /></Modal>
       <Modal modalName={"modalEditTeam"}><FormEditTeam /></Modal>
+      <Modal modalName={"modalRemoveTeam"}><FormRemoveTeam /></Modal>
+      <Modal modalName={"modalMoveUsers"}><FormMoveUsers /></Modal>
 
       <Banner />
       <section className="section padding container gap">
@@ -42,12 +47,18 @@ export default function App() {
       </section>
       <section className="section">
         {teams.map((team) => (
-          <Team
+          team.id !== 0 &&
+            <Team
             key={team.id}
             team={team}
             users={users.filter((user) => user.time === team.nome)}
-          />
+            /> 
         ))}
+        {teams.map((team) => (
+          team.id === 0 &&         
+            <UnallocatedUsers />
+        ))}
+
       </section>
       <Footer dev="Thyago Ramon" link="https://github.com/thyagoramon" />
     </>

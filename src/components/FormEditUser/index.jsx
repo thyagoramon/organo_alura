@@ -5,7 +5,7 @@ import InputSelect from "../InputSelect";
 import Button from "../Button";
 import { useDispatch, useSelector } from "react-redux";
 import { editUser } from "@/store/usersSlice";
-import { changeModal } from "@/store/modalSlice";
+import { resetModals } from "@/store/modalSlice";
 
 const FormEditUserStyled = styled.form`
 	width: 100%;
@@ -72,7 +72,7 @@ const FormEditUser = () => {
     setTime("");
 
     //fechamento da modal
-    dispatch(changeModal({modal: "modalEditUser", open: false}))
+    dispatch(resetModals());
   };
 
   //componente

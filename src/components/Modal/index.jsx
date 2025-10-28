@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CloseButton from "../CloseButton";
 import { useDispatch, useSelector } from "react-redux";
-import { changeModal } from "@/store/modalSlice";
+import { resetModals } from "@/store/modalSlice";
 
 const ModalStyled = styled.div`
   position: fixed;
@@ -39,7 +39,7 @@ const ModalStyled = styled.div`
 const Modal = ({ modalName, children }) => {
   const dispatch = useDispatch();
   const open = useSelector((state) => state.modal[modalName]);
-  const close = () => dispatch(changeModal({modal: modalName, open: false}));
+  const close = () => dispatch(resetModals());
 
   return (
     open &&

@@ -2,6 +2,11 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const teams = [
   {
+    id: 0,
+    nome: "Sem time",
+    cor: "#666666",
+  },
+  {
     id: nanoid(),
     nome: "teste 1",
     cor: "#82CFFA",

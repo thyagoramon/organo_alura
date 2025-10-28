@@ -6,7 +6,7 @@ import Button from "../Button";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { addNewUser } from "@/store/usersSlice";
-import { changeModal } from "@/store/modalSlice";
+import { resetModals } from "@/store/modalSlice";
 
 const FormNewUserStyled = styled.form`
 	width: 100%;
@@ -67,7 +67,7 @@ const FormNewUser = () => {
     setTime("");
 
     //fechar modal
-    dispatch(changeModal({modal: "modalNewUser", open: false}))
+    dispatch(resetModals());
   };
 
   //componente

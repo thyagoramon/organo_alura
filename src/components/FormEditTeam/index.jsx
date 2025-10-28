@@ -4,7 +4,7 @@ import InputText from "../InputText";
 import Button from "../Button";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUsersTeam } from "@/store/usersSlice";
-import { changeModal } from "@/store/modalSlice";
+import { changeModal, resetModals } from "@/store/modalSlice";
 import InputColor from "../InputColor";
 import { editTeam, removeTeam } from "@/store/teamsSlice";
 
@@ -18,9 +18,11 @@ const FormEditTeamStyled = styled.form`
 
 const FormEditTeam = () => {
   const dispatch = useDispatch();
-
+  
+  //constantes
   const teamId = useSelector((state) => state.modal.modalData);
   const teams = useSelector((state) => state.teams);
+  const users = useSelector((state) => state.users);
   const team = teams.find(team => team.id === teamId);
     
   //useState dos inputs
@@ -31,15 +33,16 @@ const FormEditTeam = () => {
   //função submit edição
   const formSubmit = (e) => {
     e.preventDefault();
-    
-    //validação do nome
+
     const newName = nome.trim();
 
+    // verificação de nome vazio
     if (newName === '') {
       alert(`Nome inválido, tente outro nome`);
       return;
     }
 
+    // verificação de nome existente
     const currentName = team.nome.toLowerCase();
     const nameChanged = newName.toLowerCase() !== currentName;
 
@@ -71,11 +74,23 @@ const FormEditTeam = () => {
     dispatch(updateUsersTeam(editUsersTeam));
 
     //fechamento da modal
-    dispatch(changeModal({modal: "modalEditTeam", open: false}))
+    dispatch(resetModals())
   };
 
   const handleDelete = () => {
-    dispatch(changeModal({ modal: 'modalEditTeam', open: false, data: '' }));
+    //verificação se time contem usuários
+    const teamContainUser = users.some(user => user.time === team.nome)
+
+    //se tem usuário, opções
+    if (teamContainUser) {
+      //abrir nova modal
+      dispatch(resetModals());
+      dispatch(changeModal({modal: 'modalRemoveTeam', open: true, data: team.id}))
+      return
+    }
+
+    //se não, deleta
+    dispatch(resetModals());
     dispatch(updateUsersTeam({ oldTeamName: team.nome, newTeamName: "" }));
     dispatch(removeTeam(id));
   };
@@ -104,7 +119,7 @@ const FormEditTeam = () => {
 
       <Button
         type="button"
-        onClick={() => dispatch(changeModal({modal: 'modalEditTeam', open: false, data: ''}))}
+        onClick={() => dispatch(resetModals())}
       >Cancelar</Button>
 
       <Button

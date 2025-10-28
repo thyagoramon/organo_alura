@@ -4,7 +4,7 @@ import InputText from "../InputText";
 import Button from "../Button";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
-import { changeModal } from "@/store/modalSlice";
+import { resetModals } from "@/store/modalSlice";
 import InputColor from "../InputColor";
 import { addNewTeam } from "@/store/teamsSlice";
 
@@ -60,7 +60,7 @@ const FormNewTeam = () => {
     setCor("");
 
     //fechar modal
-    dispatch(changeModal({modal: "modalNewTeam", open: false}))
+    dispatch(resetModals());
   };
 
   //componente
