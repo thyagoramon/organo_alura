@@ -28,6 +28,7 @@ export default function App() {
       <Modal modalName={"modalMoveUsers"}><FormMoveUsers /></Modal>
 
       <Banner />
+      
       <section className="section padding container gap">
         <Button
           onClick={() =>
@@ -56,7 +57,7 @@ export default function App() {
         ))}
         {teams.map((team) => (
           team.id === 0 &&         
-            <UnallocatedUsers />
+            <UnallocatedUsers key={team.id}/>
         ))}
 
       </section>

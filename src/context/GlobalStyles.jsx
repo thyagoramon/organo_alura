@@ -21,8 +21,8 @@ const GlobalStyles = createGlobalStyle`
 * {
   margin: 0;
   padding: 0;
-  text-decoration: none;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 body {  
@@ -39,10 +39,19 @@ body {
   align-items: center;
 }
 
-h3 {
+h1, h2, h3 {
   font-family: var(--fonte-prata);
-  font-size: 24px;
   font-weight: 500;
+}
+
+h2 {
+  font-size: 4rem;
+  line-height: 4.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 2.5rem;
 }
 
 .section {
